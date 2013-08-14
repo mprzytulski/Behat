@@ -2,9 +2,6 @@
 
 namespace Behat\Behat\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder,
-    Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-
 /*
  * This file is part of the Behat.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
@@ -12,6 +9,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder,
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Behat extension interface.
@@ -20,6 +20,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder,
  */
 interface ExtensionInterface
 {
+    /**
+     * Returns the extension name.
+     *
+     * @return string
+     */
+    public function getName();
+
     /**
      * Loads a specific configuration.
      *
@@ -38,7 +45,7 @@ interface ExtensionInterface
     /**
      * Returns compiler passes used by this extension.
      *
-     * @return array
+     * @return CompilerPassInterface[]
      */
     public function getCompilerPasses();
 }
